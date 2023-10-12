@@ -1,0 +1,13 @@
+server:
+  port:
+    8808
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/new_schema
+    username: root
+    password: root1234
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
