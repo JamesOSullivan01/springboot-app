@@ -1,9 +1,11 @@
 package com.james.springbootapp;
 
-import com.james.springbootapp.controller.MyProjectController;
-import com.james.springbootapp.service.MyProjectService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class SpringbootAppApplication {

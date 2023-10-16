@@ -8,16 +8,11 @@ import java.util.Optional;
 
 public interface MyProjectService {
 
-
-
     //read(get) employee list
    List<Employee> fetchEmployeeList();
 
    //Find all employess
     List<Employee> findAllEmployees();
-
-    //Find employee by start date and gender
-    List<Employee> findByDateAndGender() throws ParseException;
 
     //find male employees
     List<Employee> findMaleEmployees();

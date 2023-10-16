@@ -1,6 +1,8 @@
 package com.james.springbootapp.service;
 import com.james.springbootapp.entity.Employee;
 import com.james.springbootapp.repository.MyEmployeeRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
@@ -15,18 +17,11 @@ public class MYProjectServiceImpl implements MyProjectService{
     private MyEmployeeRepository myEmployeeRepository;
         //All business logic runs in service Implementation class
 
-    //hired before 2018 and gender  male
-    @Override
-    public List<Employee> findByDateAndGender() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-        Date targetDate = sdf.parse("2020-12-31");
-        return myEmployeeRepository.findEmployeesByStartDateBeforeAndGender(targetDate, 'm');
-    }
-
     @Override
     public List<Employee> findMaleEmployees() {
         //Getting all employees
         List<Employee>  allEmployees = myEmployeeRepository.findAll();
+        allEmployees.get(0).getAddressList();
         //Filtering out male employees
         List<Employee> maleEmployees = allEmployees.stream()
                                                     .filter(m -> m.getGender().equals('m'))

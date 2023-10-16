@@ -21,12 +21,6 @@ public class MyProjectController {
         return myProjectService.findAllEmployees();
     }
 
-    //Find employee hired before a date and by gender
-    @GetMapping("/find-by-date-and-gender")
-    public List<Employee> findByDateAndGender() throws ParseException {
-        return myProjectService.findByDateAndGender();
-    }
-
     // Find male employees
     @GetMapping("/find-males")
     public List<Employee> findmales(){
