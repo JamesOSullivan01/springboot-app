@@ -5,7 +5,6 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Getter
 @Setter
 @Entity
@@ -27,5 +26,16 @@ public class Address {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "address_id=" + address_id +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipcode=" + zipcode +
+                '}';
+    }
 
 }

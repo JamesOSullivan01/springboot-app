@@ -1,5 +1,6 @@
 package com.james.springbootapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "employee_table")
 public class Employee {
@@ -30,11 +30,24 @@ public class Employee {
     @Column(name = "username")
     private String username;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
    private List<Address> addressList = new ArrayList<>();
 
     //fetch and eager
 
 
-}
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", salary='" + salary + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
+
+    }
+

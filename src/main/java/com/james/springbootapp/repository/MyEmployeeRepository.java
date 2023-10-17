@@ -1,8 +1,6 @@
 package com.james.springbootapp.repository;
 
 import com.james.springbootapp.entity.Employee;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
