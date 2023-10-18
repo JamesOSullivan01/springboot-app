@@ -1,20 +1,21 @@
 package com.james.springbootapp.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "employee_table")
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "employee_id")
@@ -29,25 +30,8 @@ public class Employee {
     private String salary;
     @Column(name = "username")
     private String username;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    private List<Address> addressList = new ArrayList<>();
-
-    //fetch and eager
-
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", salary='" + salary + '\'' +
-                ", username='" + username + '\'' +
-                '}';
-    }
 
     }
 

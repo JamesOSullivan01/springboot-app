@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,11 +20,12 @@ public class MYProjectServiceImpl implements MyProjectService{
     private MyEmployeeRepository myEmployeeRepository;
         //All business logic runs in service Implementation class
 
+
     @Override
     public List<Employee> findMaleEmployees() {
         //Getting all employees
         List<Employee>  allEmployees = myEmployeeRepository.findAll();
-        allEmployees.get(0).getAddressList();
+//        allEmployees.get(0).getAddressList();
         //Filtering out male employees
         List<Employee> maleEmployees = allEmployees.stream()
                                                     .filter(m -> m.getGender().equals('m'))
@@ -39,16 +43,25 @@ public class MYProjectServiceImpl implements MyProjectService{
 
     @Override
     public List<Employee> findAllEmployees(){
-        List<Employee> allData = myEmployeeRepository.findAll();
-        allData.stream()
-                .forEach(System.out::println);
-        return allData;
+        return myEmployeeRepository.findAll();
     }
 
     @Override
     public Employee saveEmployee(Employee employee) {
+        ZoneId estTimeZone = ZoneId.of("America/New_York");
+        ZonedDateTime estDateTime = ZonedDateTime.now(estTimeZone);
+        Date date = Date.from(estDateTime.toInstant());
+//        employee.setDate(date);
         return myEmployeeRepository.save(employee);
     }
+
+//WHY ISNT THIS WORKING
+//    @Override
+//    public Employee saveEmployee(Employee employee) {
+//        String username = employee.getFirstName() + "." + employee.getLastName() + "." + employee.getEmployeeId();
+//        employee.setUsername(username);
+//        return myEmployeeRepository.save(employee);
+//    }
 
     @Override
     public Employee updateEmployee(Employee employee) {
