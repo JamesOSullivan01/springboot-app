@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -66,6 +68,11 @@ public class MYProjectServiceImpl implements MyProjectService{
     @Override
     public Employee updateEmployee(Employee employee) {
         return myEmployeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee findEmployeeById(Integer employeeId) {
+        return myEmployeeRepository.findEmployeeByEmployeeId(employeeId);
     }
 
 

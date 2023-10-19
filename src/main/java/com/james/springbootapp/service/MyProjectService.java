@@ -25,5 +25,8 @@ public interface MyProjectService {
 
     //trying to get the address
 
+    //find employee by ID
+    Employee findEmployeeById(Integer employeeId);
+
 
 }

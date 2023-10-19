@@ -1,7 +1,9 @@
 package com.james.springbootapp.controller;
 import com.james.springbootapp.entity.Employee;
 import com.james.springbootapp.service.MyProjectService;
+import org.apache.catalina.util.Introspection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
@@ -37,6 +39,26 @@ public class MyProjectController {
     public Employee updateEmployee(Employee employee){
         return myProjectService.updateEmployee(employee);
     }
+
+//    Find employee by id using path Variable
+    @GetMapping("/find-employee/{employee_id}")
+    public Employee findById(@PathVariable Integer employee_id){
+        Employee employee = myProjectService.findEmployeeById(employee_id);
+        return employee;
+    }
+
+    //This did not work:
+//    @GetMapping("/find-employee")
+//    public ResponseEntity<Employee> findById(@RequestParam Integer employee_id) {
+//        Employee employee = myProjectService.findEmployeeById(employee_id);
+//
+//        if (employee != null) {
+//            return ResponseEntity.ok(employee);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
 
 }
 
