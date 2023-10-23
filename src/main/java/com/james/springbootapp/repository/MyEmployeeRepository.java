@@ -15,4 +15,6 @@ public interface MyEmployeeRepository extends JpaRepository <Employee, Long> {
     List<Employee> findAll();
 
     Employee findEmployeeByEmployeeId(Integer employeeId);
+
+    void deleteEmployeeByEmployeeId(Integer employeeId);
 }

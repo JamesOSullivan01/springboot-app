@@ -33,5 +33,9 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    private List<Address> addressList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Licenses> licenseList = new ArrayList<>();
+
+
     }
 

@@ -28,5 +28,7 @@ public interface MyProjectService {
     //find employee by ID
     Employee findEmployeeById(Integer employeeId);
 
+    void deleteEmployeeById(Integer employeeId);
+
 
 }
