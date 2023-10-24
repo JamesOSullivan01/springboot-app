@@ -58,7 +58,7 @@ public class MYProjectServiceImpl implements MyProjectService{
         return myEmployeeRepository.save(employee);
     }
 
-//WHY ISNT THIS WORKING
+
 //    @Override
 //    public Employee saveEmployee(Employee employee) {
 //        String username = employee.getFirstName() + "." + employee.getLastName() + "." + employee.getEmployeeId();
@@ -81,6 +81,7 @@ public class MYProjectServiceImpl implements MyProjectService{
     public void deleteEmployeeById(Integer employeeId) {
         myEmployeeRepository.deleteEmployeeByEmployeeId(employeeId);
     }
+    //says to DB to get ready to change
 
 
 }

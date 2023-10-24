@@ -1,6 +1,8 @@
 package com.james.springbootapp.controller;
+import com.james.springbootapp.entity.LicenseDTO;
 import com.james.springbootapp.entity.Licenses;
 import com.james.springbootapp.repository.LicensesRepository;
+import com.james.springbootapp.service.LicensesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,13 @@ public class LicenseController {
     @Autowired
     private LicensesRepository licensesRepository;
 
-//    @PostMapping("/new-license")
-//    public
+    @Autowired
+    private LicensesService licensesService;
+
+    @PostMapping("/new-license")
+    public Licenses newLicense(@RequestBody LicenseDTO licenses){
+        return licensesService.saveLicense(licenses);
+    }
 
 
     //find out how to use date formatter

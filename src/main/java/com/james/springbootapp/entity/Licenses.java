@@ -20,11 +20,11 @@ public class Licenses implements Serializable {
     @GeneratedValue
     @Id
     @Column(name="license_id")
-    private Long license_id;
+    private Integer license_id;
     @Column(name = "license_start_date")
-    private Date licenseStart;
+    private String licenseStart;
     @Column(name="license_end_date")
-    private Date licenseEnd;
+    private String licenseEnd;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
