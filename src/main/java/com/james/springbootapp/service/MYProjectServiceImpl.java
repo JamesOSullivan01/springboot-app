@@ -23,6 +23,8 @@ public class MYProjectServiceImpl implements MyProjectService{
     private MyEmployeeRepository myEmployeeRepository;
         //All business logic runs in service Implementation class
 
+    private static Integer counter = 0;
+
 
     @Override
     public List<Employee> findMaleEmployees() {
@@ -49,22 +51,19 @@ public class MYProjectServiceImpl implements MyProjectService{
         return myEmployeeRepository.findAll();
     }
 
+
+
+
+
     @Override
     public Employee saveEmployee(Employee employee) {
-        ZoneId estTimeZone = ZoneId.of("America/New_York");
-        ZonedDateTime estDateTime = ZonedDateTime.now(estTimeZone);
-        Date date = Date.from(estDateTime.toInstant());
-//        employee.setDate(date);
+       counter++;
+        String username = employee.getFirstName() + "." + employee.getLastName() + "." + counter;
+        System.out.println("Generated username: " + username);
+
+        employee.setUsername(username);
         return myEmployeeRepository.save(employee);
     }
-
-
-//    @Override
-//    public Employee saveEmployee(Employee employee) {
-//        String username = employee.getFirstName() + "." + employee.getLastName() + "." + employee.getEmployeeId();
-//        employee.setUsername(username);
-//        return myEmployeeRepository.save(employee);
-//    }
 
     @Override
     public Employee updateEmployee(Employee employee) {

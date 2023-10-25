@@ -8,9 +8,12 @@ import com.james.springbootapp.repository.MyEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LicensesServiceImpl implements LicensesService{
@@ -20,26 +23,46 @@ public class LicensesServiceImpl implements LicensesService{
     @Autowired
     private MyEmployeeRepository myEmployeeRepository;
 
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.of("America/New_York"));
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneId.of("America/New_York"));
 
+
+
+@Override
+public Licenses saveLicense(LicenseDTO licenses) {
+    System.out.println("======" + licenses.getEmployeeId());
+    Licenses entity = new Licenses();
+
+    Employee employee = myEmployeeRepository.getById(Long.valueOf(licenses.getEmployeeId()));
+    System.out.println("===============" + "================" + employee.getFirstName());
+
+    LocalDateTime licenseStartDate = formatDate(licenses.getLicenseStart());
+    LocalDateTime licenseEndDate = formatDate(licenses.getLicenseEnd());
+
+    entity.setLicenseStart(licenseStartDate);
+    entity.setLicenseEnd(licenseEndDate);
+    entity.setEmployee(employee);
+
+    return licensesRepository.save(entity);
+}
 
     @Override
-    public Licenses saveLicense(LicenseDTO licenses) {
-        System.out.println("======" + licenses.getEmployeeId());
-        Licenses entity = new Licenses();
+    public List<Licenses> findLicensesAboutToExpire(LocalDateTime date) {
+            List<Licenses> expiringLicenses = licensesRepository.findAll();
 
-        Employee employee = myEmployeeRepository.getById(Long.valueOf(licenses.getEmployeeId()));
-        System.out.println("===============" + "================" + employee.getFirstName());
-        entity.setLicenseStart(String.valueOf(formatDate(licenses.getLicenseStart())));
-        entity.setLicenseEnd(String.valueOf(formatDate(licenses.getLicenseEnd())));
-        entity.setEmployee(employee);
-        return licensesRepository.save(entity);
+        List<Licenses> filteredLicenses = expiringLicenses.stream()
+                .filter(license -> license.getLicenseEnd().isBefore(date))
+                .collect(Collectors.toList());
+
+
+        return filteredLicenses;
     }
 
-    public ZonedDateTime formatDate(String dateString){
-
-        return ZonedDateTime.parse(dateString,  dtf);
+    public LocalDateTime formatDate(String dateString){
+        return LocalDateTime.parse(dateString, dtf);
     }
+
+
+
 
     //seperate formatting function because of code reusability(solid principles java)
 

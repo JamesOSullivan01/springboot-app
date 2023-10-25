@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "employee_table")
 public class Employee implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
     private Integer employeeId;
     @Column(name = "first_name")
